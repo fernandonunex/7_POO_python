@@ -32,6 +32,35 @@ class Employee:
             return False
         return True
 
+class Developer(Employee):
+    
+    def __init__(self, first, last, pay, prog_lang):
+        super().__init__(first, last, pay)
+        self.prog_lang = prog_lang
+
+class Manager(Employee):
+
+    def __init__(self, first, last, pay, employees = None):
+        super().__init__(first, last, pay)
+        if employees is None:
+            employees = []
+        else:
+            self.employees = employees
+    
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+    
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+        
+    def print_emps(self):
+        for emp in self.employees:
+            print(f"----> {emp.full_name()}")
+    
+
+
 #---------------------Instances-----------------------
 emp_1 = Employee('Fernando', 'Nunez', 70000)
 emp_2 = Employee('Eric', 'Ries', 1000000)
@@ -71,12 +100,36 @@ emp_2 = Employee('Eric', 'Ries', 1000000)
 # print(emp_2.raise_amount)
 
 #Creating an alternative to constructor of a class
+#CLASSMETHOD
 # new_emp_3 = Employee.from_string('Juan-Munson-80000')
 
 # print(new_emp_3.email)
 # print(new_emp_3.pay)
 
-import datetime
-my_date = datetime.date(2022, 1, 10)
+# #STATICMETHOD
+# import datetime
+# my_date = datetime.date(2022, 1, 10)
 
-print(Employee.is_workday(my_date))
+# print(Employee.is_workday(my_date))
+
+#----------------Inheritance - Creating Subclasses-------------
+
+dev_1 = Developer('Vicente', 'Fernandez', 150000, 'Python')
+dev_2 = Developer('Junior', 'H', 90000, 'Ruby')
+
+#print(dev_1.email)
+# print(help(Developer))  This line print information about something
+
+mgr = Manager('Laptop', 'Hp', 50, [dev_1,dev_2])
+
+# print(mgr.pay)
+# mgr.print_emps()
+
+# mgr.add_emp(emp_1)
+# print("*****")
+# mgr.print_emps()
+# mgr.remove_emp(dev_1)
+# print("*****")
+# mgr.print_emps()
+
+# print(issubclass(Employee, Manager))
