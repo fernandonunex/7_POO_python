@@ -32,6 +32,16 @@ class Employee:
             return False
         return True
 
+    def __str__(self):
+        return f'{self.full_name()} - {self.email}'
+    
+    def __repr__(self):
+        return f'Employee({self.first}, {self.last}, {self.pay})'
+
+    def __add__(self, other):
+        return self.pay + other.pay
+
+
 class Developer(Employee):
     
     def __init__(self, first, last, pay, prog_lang):
@@ -133,3 +143,16 @@ mgr = Manager('Laptop', 'Hp', 50, [dev_1,dev_2])
 # mgr.print_emps()
 
 # print(issubclass(Employee, Manager))
+
+#---------------Special (Magic/Dunder) Methods ------------
+
+# print(emp_1)
+# print(repr(emp_1))
+# print(str(emp_1))
+
+print(emp_1.pay)
+print(emp_2.pay)
+
+print(emp_1 + emp_2)
+
+
