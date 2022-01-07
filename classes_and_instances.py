@@ -6,13 +6,29 @@ class Employee:
     def __init__(self, first, last, pay):
         self.first = first
         self.last = last
-        self.pay = pay
-        self.email = first + '.' + last + '@web.com'        
+        self.pay = pay        
 
         Employee.num_of_emps += 1
 
+    @property
     def full_name(self):
         return f'{self.first} {self.last}'
+    
+    @full_name.setter
+    def full_name(self, name):
+        first, last = name.split(' ')
+        self.first = first
+        self.last = last
+    
+    @full_name.deleter
+    def full_name(self):
+        print('The name has been deleted')
+        self.first = None
+        self.last = None
+
+    @property
+    def email(self):
+        return f'{self.first}.{self.last}@web.com'
 
     def apply_raise(self):
         self.pay = self.raise_amount * self.pay
@@ -150,9 +166,20 @@ mgr = Manager('Laptop', 'Hp', 50, [dev_1,dev_2])
 # print(repr(emp_1))
 # print(str(emp_1))
 
-print(emp_1.pay)
-print(emp_2.pay)
+# print(emp_1.pay)
+# print(emp_2.pay)
 
-print(emp_1 + emp_2)
+# print(emp_1 + emp_2)
+
+#-----------------Property Decorators - Getters, Setters, and Deleters-------
+
+emp_3 = Employee('Ezekiel', 'Boone', 0)
+#emp_3.first = 'Juan'
+emp_3.full_name = 'Palma Tree'
+
+print(emp_3.full_name)
+print(emp_3.email)
+
+del emp_3.full_name
 
 
